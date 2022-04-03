@@ -1,15 +1,4 @@
-<!--
-    Create a simple "User" CRUD registration page with Search functionality.
-        a. Validations should be there.
-        b. Proper naming conventions should be followed.
-        c. Make it as good looking as you can.
-        d. OOPS mandatory and must be use wisely.
-
-    @auther : Shubham Sharma
--->
-
-<!--This is the index file and hence will be loaded first-->
-<!--This page contains functionality for user to sign up-->
+<!--This page contains sign up page for admin-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,17 +12,18 @@
     -->
        <!--External CSS-->
     <link rel="stylesheet" href="css\style.css">
+
+
     <!-- Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
-    
 </head>
 <body>
-            <!-- User sign up form-->
-            <form name="signup" onsubmit="return validateSignupForm();"> <!-- fucntion will validate inputs and further input the data into JSON array-->
-                <h3>Sign up here</h3>
+            <!-- Admin sign up form-->
+            <form name="signup" onsubmit="return setUserType();"> <!-- fucntion will set user type as admin and validate inputs and further input the data into JSON array-->
+                <h3>Sign up here (Admin)</h3>
                     
                             <input type="text" id="full_name" name="full_name" placeholder="Full Name" required>
                             <input type="email" id="email" name="email" placeholder="Email Address" required>
@@ -48,10 +38,10 @@
                             <input type="password" id="password" name="password" placeholder="Password" required>
                             <button type="submit" value="submit">Sign Up</button>
                             <br><br><br><p>Already have an account? &nbsp&nbsp&nbsp <a href="login.html">Log in !</a></p>
+
             </form>
 
 <!-- External JavaScript -->
 <script src="js\storeRegistrationData.js"></script>
-
 </body>
 </html>

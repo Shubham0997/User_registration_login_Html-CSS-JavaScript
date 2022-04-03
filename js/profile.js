@@ -1,3 +1,4 @@
+//if a logged in user tries to visit profile after loggin out, error will prompted
 let name=localStorage.getItem('FullName')?localStorage.getItem('FullName'):''
 let username=localStorage.getItem('Username')?localStorage.getItem('Username'):''
 console.log(name);
@@ -7,20 +8,7 @@ if(name=='')
   window.location.href="login.html";
 }
 
-let user_records= new Array();
-user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[]
-console.log(username);
-const index = user_records.findIndex(user_records => user_records.Username == username);
-console.log(index);
-
-
-//Log object to Console.
-console.log("Before update: ", user_records[index])
-
-user_records[index].Username="Doubleunderscore";
-localStorage.setItem("Users",JSON.stringify(user_records));
-
-
+//logout functionality
 function Logout()
 {
 
@@ -29,5 +17,6 @@ function Logout()
   localStorage.removeItem('PhoneNumber');
   localStorage.removeItem('Gender');
   localStorage.removeItem('Username');
+  localStorage.removeItem('UserType');
   window.location.href="login.html";
 }

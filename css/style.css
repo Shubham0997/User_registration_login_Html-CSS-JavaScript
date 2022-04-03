@@ -1,3 +1,4 @@
+/* This css file contaion common css properties for the whole project*/
 *,
 *:before,
 *:after{
@@ -18,13 +19,17 @@ body{
 }
 
 form{
+    align-content: center;
     height:auto;
-    width: 500px;
-    background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
+    width: auto;
+    background-color: rgba(101, 77, 156, 0.13);
+    position:absolute;
+   
+    margin-left : 40vw;
+    margin-top: 10vw;
+    /* transform: translate(-50%,-50%);
     top: 50%;
-    left: 50%;
+    left: 50%; */
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
@@ -64,6 +69,7 @@ input {
     font-weight: 300;
 }
 
+/*Gender option */
 #Gender{
     display: block;
     height: 40px;
@@ -93,5 +99,24 @@ button{
     cursor: pointer;
 }
 
-
-/*navbar*/
+/* Delete button*/
+#myBtn {
+    display: none;
+    position: fixed;
+    width: auto;
+    bottom: 2px;
+    right: 10px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #2a2c44;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
+  
+  #myBtn:hover {
+    background-color: #2a2c44;
+  }
