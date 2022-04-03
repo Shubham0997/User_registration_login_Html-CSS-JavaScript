@@ -20,14 +20,14 @@
     
 </head>
 <body>
-            <form name="signin">
+            <form name="signin" onsubmit="return false">
                 <h3>Log In here</h3>
 
                             <input type="text" id="username" name="username" placeholder="Username" required>
 
                             <input type="password" id="password" name="password" placeholder="Password" required>
               
-                            <button>Log in</button>
+                            <button type="submit" value="submit" onclick="loginAuthentication()">Log in</button>
 
                             <br><br><br><p>Don't have an account?  &nbsp&nbsp&nbsp<a href="index.html">Sign Up !</a></p>
 
@@ -35,6 +35,6 @@
 
 
 <!-- External JavaScript -->
-
+<script src="js\loginAuthentication.js"></script>
 </body>
 </html>

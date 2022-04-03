@@ -12,17 +12,21 @@ function updateDatabase () {
 
 
     if(user_records.some((v)=>{return v.Username==username})){
-        window.alert("User already exists");
+        window.alert("User already exists.");
     }else{
+    
         user_records.push({
-            "Full Name":fullName,
+            "FullName":fullName,
             "email":email,
-            "Phone Number":phoneNumber,
+            "PhoneNumber":phoneNumber,
             "Gender":gender,
             "Username":username,
             "Password":password
         })
         localStorage.setItem("Users",JSON.stringify(user_records));
+        window.alert("User account created successfully.");
     }
+
+    
 
 }
