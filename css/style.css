@@ -8,6 +8,7 @@
 }
 body{
     background-color: #5d597c;
+    place-items: center;
 }
 .background{
     width: 430px;
@@ -99,24 +100,9 @@ button{
     cursor: pointer;
 }
 
-/* Delete button*/
-#myBtn {
-    display: none;
-    position: fixed;
-    width: auto;
-    bottom: 2px;
-    right: 10px;
-    z-index: 99;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: #2a2c44;
-    color: white;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 4px;
-  }
-  
-  #myBtn:hover {
-    background-color: #2a2c44;
-  }
+@media only screen and (max-width: 600px) {
+    form{
+        margin-left : 0vw;
+        margin-top: 0vw;
+    }
+   }

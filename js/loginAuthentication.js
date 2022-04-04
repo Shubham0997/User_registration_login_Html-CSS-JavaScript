@@ -2,20 +2,12 @@
 
 // if a user is logged in but tries to visit sign in page, the following will redirect them to their profile pages
 let FullName=localStorage.getItem('FullName')?localStorage.getItem('FullName'):'' //checking is there is a name in the local storage, if there is, someone is logged in
-let userTypeCheck=localStorage.getItem('UserType')?localStorage.getItem('UserType'):''
 
-console.log(FullName);
+
 if(FullName!='')
-{
-  alert("You're logged in, Please visit your profile");
-  if(userTypeCheck=="Admin"){
-    console.log("Admin type user");
-    window.location.href="adminDashboard.html";
-
-}else{
-    console.log("User type user");
-    window.location.href="userDashboard.html";
-}
+{ 
+    window.location.href="commonProfile.html";
+  
 }
 
 //verifying user credentials 
@@ -40,14 +32,7 @@ function loginAuthentication(){
         localStorage.setItem('Username',current_user.Username);
         localStorage.setItem('UserType',current_user.UserType);
 
-        if(current_user.UserType=="Admin"){ // if user type == admin, redirecting to adminDashboard
-            console.log("Admin type user");
-            window.location.href="adminDashboard.html";
-
-        }else{ //if user type== user, redirecting to userDashboard
-            console.log("User type user");
-            window.location.href="userDashboard.html";
-        }
+        window.location.href="commonProfile.html";
 
     }else{
         alert("Username or password incorrect!");

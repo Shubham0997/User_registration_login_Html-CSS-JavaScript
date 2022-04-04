@@ -59,7 +59,8 @@ function updateDatabase () {
             "Password":password
         })
         localStorage.setItem("Users",JSON.stringify(user_records)); //upload data into Users JSON Array
-        window.alert("User account created successfully.");
+        window.alert("User account created successfully. Please log in!");
+        window.location.href="login.html";
     }
 
 }
