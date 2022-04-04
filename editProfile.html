@@ -1,4 +1,4 @@
-<!--This page is the profile page of admin where they can check, update their profile and contains table with user data and funtionality to dete user-->
+<!--This page edits/updates the user profile -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css\navbar.css">
 
 <style>
-
 form{ 
       position:relative;
   margin-top: 30%;
@@ -43,15 +42,16 @@ form{
 <body>
 
 
-  <!--Navbar-->
+  <!--Navbar begins-->
     <div class="topnav">
         <a  href="commonProfile.html">Home</a>
         <a class="active" href="editProfile.html">Update Profile</a>
         <a id="searchUsers" href="searchUsers.html">Search Users</a>
-        <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button><!--Logout button-->
+        <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button><!--Logout button calls the function in profile.js-->
       </div>
+      <!--Navbar Ends-->
 
-      <script>
+      <script>//following script removes searchUser.html if usertype=='User', from navbar as this feature is not given to the user
           let UserType=localStorage.getItem('UserType')?localStorage.getItem('UserType'):''
             if(UserType=="User"){
                 document.getElementById("searchUsers").style.display = "none";
@@ -60,6 +60,7 @@ form{
 
 
     <!--Update/edit profile form-->
+    <div class="form__center">
     <form name="update" style="width: auto; margin-left : 30vw;  margin-right : 30vw; margin-top: 10vw; " onsubmit="return false" id="updateProfile">
         <h3>Edit Profile</h3>
             
@@ -76,7 +77,7 @@ form{
                     <input type="password" id="password" name="password" placeholder="Password" >
                     <button type="submit" value="submit" onclick="updateProfile();">Update</button> <!--update profile function-->
     </form>
-
+  </div>
  
 
 <!-- External JavaScript -->

@@ -11,14 +11,24 @@ function validateSignupForm() {
   
     let phoneNumber= document.forms["signup"]["number"].value;
     let password=document.forms["signup"]["password"].value;
-    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+    let email = document.forms["signup"]["email"].value;
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/; //password regex
  
-    if (phoneNumber.length != 10) {
+
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) //check for email validation
+    {
+      user_records[index].email=email;
+      localStorage.setItem("Users",JSON.stringify(user_records));
+    }else{
+      window.alert("Enter a valid Email address");
+    }
+
+    if (phoneNumber.length != 10) { // check for password length
       window.alert("Enter a valid phone number");
       return false;
     }
 
-    if(!regularExpression.test(password)) {
+    if(!regularExpression.test(password)) { //check for password using regex
         alert("Password should contain atleast one number, one special character and must have 8-16 characters.");
         return false;
     }
@@ -40,15 +50,15 @@ function updateDatabase () {
     if(userType==""){ //will execute if user type is empty
         userType="User"
     }
-    console.log(userType);
+  
 
-    let user_records= new Array();
+    let user_records= new Array(); 
     user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[] //putting data from User array into user_records
 
     if(user_records.some((v)=>{return v.Username==username})){ //checking if user already exists
         window.alert("User already exists.");
     }else{
-        //if user doesn't exists, add record to data
+        //if user doesn't exists, add record to 'Users' Array
         user_records.push({
             "FullName":fullName,
             "email":email,
@@ -59,8 +69,9 @@ function updateDatabase () {
             "Password":password
         })
         localStorage.setItem("Users",JSON.stringify(user_records)); //upload data into Users JSON Array
-        window.alert("User account created successfully. Please log in!");
-        window.location.href="login.html";
+
+        window.alert("User account created successfully. Please log in!")
+        window.location.href="login.html"; //redirect to login.html after a successful sign up
     }
 
 }

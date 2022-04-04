@@ -1,7 +1,8 @@
-var updateID;
+
+var updateID; //index of user to updated by the admin
 function openForm(index) {
-    this.updateID= index;
-  document.getElementById("myForm").style.display = "block";
+    this.updateID= index; //setting value of index to a global variable
+  document.getElementById("myForm").style.display = "block"; //opening popup form to update user by admin
 }
 
 function updateUser(){
@@ -16,14 +17,24 @@ let username = document.forms["updateUserByAdmin"]["username"].value;
 let user_records= new Array();
 user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[] 
 
+var counterForUpdatedValues=0;//number of fields updated by the admin
+
 if(fullName!=''){ //if name is being updated
     user_records[index].FullName=fullName;
     localStorage.setItem("Users",JSON.stringify(user_records));
+    counterForUpdatedValues++;//number of fields updated by the admin incremented
     }
 
 if(email!=''){ // if email is being updated
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+  {
     user_records[index].email=email;
     localStorage.setItem("Users",JSON.stringify(user_records));
+    counterForUpdatedValues++;
+  }else{
+    window.alert("Enter a valid Email address");
+  }
+
     }
 
 if(phoneNumber!=''){ //if phone number is being updated
@@ -33,12 +44,14 @@ if(phoneNumber!=''){ //if phone number is being updated
       }else{
     user_records[index].PhoneNumber=phoneNumber;
     localStorage.setItem("Users",JSON.stringify(user_records));
+    counterForUpdatedValues++;
       }
     }
 
 if(gender!=''){//if gender is being updated
     user_records[index].Gender=gender;
     localStorage.setItem("Users",JSON.stringify(user_records));
+    counterForUpdatedValues++;
     }
 
 if(username!=''){ // if username is being updated
@@ -47,11 +60,18 @@ if(username!=''){ // if username is being updated
     }else{
     user_records[index].Username=username;
     localStorage.setItem("Users",JSON.stringify(user_records));
+    counterForUpdatedValues++;
     }
     }
-    document.location.reload(true);
+
+   
+    if(counterForUpdatedValues>0){
+      window.alert(counterForUpdatedValues +" fields Updated Successfully")
+      document.location.reload(true);
+    }
+    
 }
 
-function closeForm() {
+function closeForm() { //function to close the popup form to update user values
   document.getElementById("myForm").style.display = "none";
 }

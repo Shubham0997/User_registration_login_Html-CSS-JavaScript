@@ -1,4 +1,4 @@
-<!--This page is the profile page of admin where they can check, update their profile and contains table with user data and funtionality to dete user-->
+<!--This page is the profile page for both user and admin. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,45 +33,56 @@ form{
   margin-top: 30%;
 
     }
-
     </style>
 
 </head>
 <body style=" place-items: center;">
 
 
-  <!--Navbar-->
-    <div class="topnav">
-        <a class="active" href="commonProfile.html">Home</a>
-        <a href="editProfile.html">Update Profile</a>
-        <a id="searchUsers" href="searchUsers.html">Search Users</a>
+  <!--Navbar begins-->
+  <div class="topnav">
+    <a class="active" href="commonProfile.html">Home</a>
+    <a href="editProfile.html">Update Profile</a>
+    <a id="searchUsers" href="searchUsers.html">Search Users</a> 
+    <button class="logoutButton" type="submit" value="submit" onclick="Logout();">Log Out</button> <!--Logout button calls the function in profile.js-->
+  </div>
+   <!--Navbar ends-->
 
-        <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button><!--Logout button-->
 
-      </div>
+  <script> //following script removes searchUser.html if usertype=='User', from navbar as this feature is not given to the user
+    let UserType = localStorage.getItem('UserType') ? localStorage.getItem('UserType') : ''
+    if (UserType == "User") {
+      document.getElementById("searchUsers").style.display = "none";
+    }
+  </script>
 
-      <script>
-          let UserType=localStorage.getItem('UserType')?localStorage.getItem('UserType'):''
-            if(UserType=="User"){
-                document.getElementById("searchUsers").style.display = "none";
-            }
-      </script>
-    
-      <!--Profile form-->
-      <form onsubmit="return false" style="width: auto;  margin-left : 30vw;  margin-right : 30vw;margin-top: 10vw" id="home">
-        <h3>Profile</h3><br>
-        <output>Name    : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output ><script>document.write(localStorage.getItem('FullName'));</script></output><br>
-        <output>Userame : &nbsp;&nbsp;&nbsp;&nbsp;</output><output ><script>document.write(localStorage.getItem('Username'));</script></output><br>
-        <output>Gender  : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output ><script>document.write(localStorage.getItem('Gender'));</script></output><br>
-        <output>Number : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output ><script>document.write(localStorage.getItem('PhoneNumber'));</script></output><br>
-        <output>Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output ><script>document.write(localStorage.getItem('email'));</script></output><br>
-
+  <!--Profile form-->
+  <div class="form__center">
+    <form onsubmit="return false" style="width: auto;  margin-left : 30vw;  margin-right : 30vw;margin-top: 10vw"
+      id="home">
+      <h3>Profile</h3><br>
+      <output>Name : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output>
+        <script>document.write(localStorage.getItem('FullName'));</script>
+      </output><br>
+      <output>Userame : &nbsp;&nbsp;&nbsp;&nbsp;</output><output>
+        <script>document.write(localStorage.getItem('Username'));</script>
+      </output><br>
+      <output>Gender : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output>
+        <script>document.write(localStorage.getItem('Gender'));</script>
+      </output><br>
+      <output>Number : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output>
+        <script>document.write(localStorage.getItem('PhoneNumber'));</script>
+      </output><br>
+      <output>Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output>
+        <script>document.write(localStorage.getItem('email'));</script>
+      </output><br>
     </form>
+  </div>
 
-  
-<!-- External JavaScript -->
-<script src="js\profile.js"></script>
-<script src="js\updateProfile.js"></script>
+
+  <!-- External JavaScript -->
+  <script src="js\profile.js"></script>
+ 
 
 </body>
 </html>

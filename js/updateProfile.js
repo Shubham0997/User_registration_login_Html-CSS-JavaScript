@@ -21,18 +21,27 @@ function updateProfile(){
     const index = user_records.findIndex(user_records => user_records.Username == localUsername);//getting index of the user 
     console.log(localUsername)
     console.log(index)
-   
+
+    var counterForUpdatedValues=0;//number of fields updated by the user 
     if(fullName!=''){ //if name is being updated
         user_records[index].FullName=fullName;
         localStorage.setItem("Users",JSON.stringify(user_records));
         localStorage.setItem('FullName',fullName);
+        counterForUpdatedValues++
         }
     
     if(email!=''){ // if email is being updated
+
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+        {
         user_records[index].email=email;
         localStorage.setItem("Users",JSON.stringify(user_records));
         localStorage.setItem('email',email);
-        }
+        counterForUpdatedValues++;//number of fields updated incremented
+        }else{
+            window.alert("Enter a valid Email address");
+          }
+    }
     
     if(phoneNumber!=''){ //if phone number is being updated
         if (phoneNumber.length != 10) {//check for number validation
@@ -42,6 +51,7 @@ function updateProfile(){
         user_records[index].PhoneNumber=phoneNumber;
         localStorage.setItem("Users",JSON.stringify(user_records));
         localStorage.setItem('PhoneNumber',phoneNumber);
+        counterForUpdatedValues++;
           }
         }
     
@@ -49,6 +59,7 @@ function updateProfile(){
         user_records[index].Gender=gender;
         localStorage.setItem("Users",JSON.stringify(user_records));
         localStorage.setItem('Gender',gender);
+        counterForUpdatedValues++;
         }
 
     if(username!=''){ // if username is being updated
@@ -58,6 +69,7 @@ function updateProfile(){
         user_records[index].Username=username;
         localStorage.setItem("Users",JSON.stringify(user_records));
         localStorage.setItem('Username',username);
+        counterForUpdatedValues++;
         }
         }
 
@@ -69,6 +81,11 @@ function updateProfile(){
         }else{
         user_records[index].Password=password;
         localStorage.setItem("Users",JSON.stringify(user_records));
+        counterForUpdatedValues++;
         }
         }
+        if(counterForUpdatedValues>0){
+            window.alert(counterForUpdatedValues +" fields Updated Successfully")
+            document.location.reload(true);
+          }
 }
