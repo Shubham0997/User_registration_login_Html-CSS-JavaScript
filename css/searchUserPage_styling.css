@@ -50,11 +50,18 @@
       opacity: 100%;
     display: none;
     position: fixed;
-    margin-right: 0;
+    margin-right: 40%;
+    margin-bottom: 10%;
+
     bottom: 0;
     right: 15px;
     border: 3px solid #f1f1f1;
     z-index: 9;
+
+
+
+    place-items: center;
+    padding-inline: 0.7em;
   }
   
   /* Add styles to the form container */
@@ -91,12 +98,21 @@
     opacity: 0.8;
   }
   
-  /* Add a red background color to the cancel button */
-  .form-container .cancel {
-    background-color: red;
-  }
+
   
   /* Add some hover effects to buttons */
   .form-container .btn:hover, .open-button:hover {
     opacity: 1;
+  }
+
+  .table-container#blur .activeForm{
+
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+
+  }
+
+  #popup .activeForm{
+    transition: 0.5s;
   }

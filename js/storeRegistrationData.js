@@ -9,24 +9,41 @@ function setUserType(){  //will be executed only by adminRegistration
 //validated phone number and password
 function validateSignupForm() {
   
-    let phoneNumber= document.forms["signup"]["number"].value;
-    let password=document.forms["signup"]["password"].value;
+    let fullName= document.forms["signup"]["full_name"].value;
     let email = document.forms["signup"]["email"].value;
+    let phoneNumber= document.forms["signup"]["number"].value;
+    let gender= document.forms["signup"]["Gender"].value;
+    let username= document.forms["signup"]["username"].value;
+    let password=document.forms["signup"]["password"].value;
+  
     var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/; //password regex
  
+    if(fullName==''){
+      window.alert("Enter your name");
+      return false;
+    }
 
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) //check for email validation
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) //check for email validation
     {
-      user_records[index].email=email;
-      localStorage.setItem("Users",JSON.stringify(user_records));
-    }else{
       window.alert("Enter a valid Email address");
+      return false;
     }
 
     if (phoneNumber.length != 10) { // check for password length
       window.alert("Enter a valid phone number");
       return false;
     }
+
+    if(gender==''){
+      window.alert("Select your gender");
+      return false;
+    }
+
+    if(username==''){
+      window.alert("Enter a Username");
+      return false;
+    }
+
 
     if(!regularExpression.test(password)) { //check for password using regex
         alert("Password should contain atleast one number, one special character and must have 8-16 characters.");

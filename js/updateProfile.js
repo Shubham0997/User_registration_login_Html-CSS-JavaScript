@@ -40,6 +40,7 @@ function updateProfile(){
         counterForUpdatedValues++;//number of fields updated incremented
         }else{
             window.alert("Enter a valid Email address");
+            return false;
           }
     }
     
@@ -65,6 +66,7 @@ function updateProfile(){
     if(username!=''){ // if username is being updated
         if(user_records.some((v)=>{return v.Username==username})){
             window.alert("Username already exists.");
+            return false;
         }else{
         user_records[index].Username=username;
         localStorage.setItem("Users",JSON.stringify(user_records));
@@ -84,8 +86,9 @@ function updateProfile(){
         counterForUpdatedValues++;
         }
         }
+
         if(counterForUpdatedValues>0){
-            window.alert(counterForUpdatedValues +" fields Updated Successfully")
+            window.alert(counterForUpdatedValues +" field(s) Updated Successfully")
             document.location.reload(true);
           }
 }
