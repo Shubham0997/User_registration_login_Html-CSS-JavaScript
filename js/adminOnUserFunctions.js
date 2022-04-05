@@ -6,6 +6,7 @@ function openFormOperations(index) {
   this.updateID = index; //setting value of index to a global variable
   document.getElementById("myForm").style.display = "block"; //opening popup form to update user by admin
 
+  //blur the background
   var blur2 = document.getElementById('searchUser');
   blur2.classList.toggle('activeForm')
  
@@ -18,9 +19,10 @@ function openFormOperations(index) {
   document.getElementById("number").defaultValue = user_records[updateID].PhoneNumber;
   document.getElementById("username").defaultValue = user_records[updateID].Username;
 
+  //by dafault disable the update button
   document.getElementById("editDetails").disabled = true;
 
-  $(document).ready(function () {
+  $(document).ready(function () { //enable the update button upon input change in the form
     $('.form-popup',).on('input change', function () {
 
       $('#editDetails').prop('disabled', false);
@@ -93,16 +95,30 @@ function updateUser() {
     }
   }
 
-  if (counterForUpdatedValues > 0) {
-    localStorage.setItem("Users", JSON.stringify(user_records));
+  if (counterForUpdatedValues > 0) { //if more than 0 fields are being updated
+    localStorage.setItem("Users", JSON.stringify(user_records)); //update set values into the 'Users' JSON
     window.alert(counterForUpdatedValues + " fields Updated Successfully")
     document.location.reload(true);
   }
 
 }
 
+
+    //remove user , triggered by Delete User button, using index
+    function removeItem(index) {
+      if (index > -1) {
+        user_records.splice(index, 1);
+        localStorage.setItem("Users",JSON.stringify(user_records));
+        document.location.reload(true)
+      }
+
+      return user_records;
+    }
+
+//close popup form up click
 function closeForm() { //function to close the popup form to update user values
   document.getElementById("myForm").style.display = "none";
-  var blur2 =document.getElementById('searchUser');
+
+  var blur2 =document.getElementById('searchUser');//unblur the background
   blur2.classList.toggle('activeForm')
 }

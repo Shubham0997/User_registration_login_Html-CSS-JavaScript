@@ -27,7 +27,7 @@ function updateProfile(){
     //below section checks for validation and update the records accordingly.
     if (fullName != '') { //if name is being updated
         user_records[index].FullName = fullName;
-       
+        localStorage.setItem("Users", JSON.stringify(user_records));
         localStorage.setItem('FullName', fullName);
         counterForUpdatedValues++ //number of fields updated incremented
     }
@@ -36,20 +36,22 @@ function updateProfile(){
 
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             user_records[index].email = email;
+            localStorage.setItem("Users", JSON.stringify(user_records));
             localStorage.setItem('email', email);
             counterForUpdatedValues++;
         } else {
             window.alert("Enter a valid Email address");
-            return false;
+          
         }
     }
 
     if (phoneNumber != '') { //if phone number is being updated
         if (phoneNumber.length != 10) {//check for number validation
             window.alert("Enter a valid phone number");
-            return false;
+           
         } else {
             user_records[index].PhoneNumber = phoneNumber;
+            localStorage.setItem("Users", JSON.stringify(user_records));
             localStorage.setItem('PhoneNumber', phoneNumber);
             counterForUpdatedValues++;
         }
@@ -57,6 +59,7 @@ function updateProfile(){
 
     if (gender != '') {//if gender is being updated
         user_records[index].Gender = gender;
+        localStorage.setItem("Users", JSON.stringify(user_records));
         localStorage.setItem('Gender', gender);
         counterForUpdatedValues++;
     }
@@ -64,9 +67,10 @@ function updateProfile(){
     if (username != '') { // if username is being updated
         if (user_records.some((v) => { return v.Username == username })) {
             window.alert("Username already exists.");
-            return false;
+         
         } else {
             user_records[index].Username = username;
+            localStorage.setItem("Users", JSON.stringify(user_records));
             localStorage.setItem('Username', username);
             counterForUpdatedValues++;
         }
@@ -76,15 +80,15 @@ function updateProfile(){
 
         if (!regularExpression.test(password)) { //cheking for password validation
             alert("Password should contain atleast one number, one special character and must have 8-16 characters.");
-            return false;
+     
         } else {
             user_records[index].Password = password;
+            localStorage.setItem("Users", JSON.stringify(user_records));
             counterForUpdatedValues++;
         }
     }
 
     if (counterForUpdatedValues > 0) {
-        localStorage.setItem("Users", JSON.stringify(user_records));
         window.alert(counterForUpdatedValues + " field(s) Updated Successfully")
         document.location.reload(true);
     }
