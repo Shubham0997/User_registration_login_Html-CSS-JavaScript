@@ -1,8 +1,15 @@
+
+
+  //following script removes searchUser.html from the navigation bar if usertype=='User',  as this feature is not given to the user
+  let UserType = localStorage.getItem('UserType') ? localStorage.getItem('UserType') : ''
+  if (UserType == "User") {
+    document.getElementById("searchUsers").style.display = "none";
+  }
+
+
 //if a logged in user tries to visit profile after loggin out, error will prompted
-let name=localStorage.getItem('FullName')?localStorage.getItem('FullName'):''
-let username=localStorage.getItem('Username')?localStorage.getItem('Username'):''
-console.log(name);
-if(name=='')
+let fullname=localStorage.getItem('FullName')?localStorage.getItem('FullName'):''
+if(fullname=='')
 {
   alert("You haven't logged in.");
   window.location.href="login.html";

@@ -24,15 +24,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
     <!--External CSS-->
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css\commonProfile.css">
     <link rel="stylesheet" href="css\navbar.css">
 
 <style>
-form{ 
-      position:relative;
-  margin-top: 30%;
 
-    }
     </style>
 
 </head>
@@ -44,21 +40,13 @@ form{
     <a class="active" href="commonProfile.html">Home</a>
     <a href="editProfile.html">Update Profile</a>
     <a id="searchUsers" href="searchUsers.html">Search Users</a> 
-    <button class="logoutButton" type="submit" value="submit" onclick="Logout();">Log Out</button> <!--Logout button calls the function in profile.js-->
+    <button class="logoutButton" type="submit" value="submit" onclick="Logout();">Log Out</button> 
   </div>
    <!--Navbar ends-->
 
-
-  <script> //following script removes searchUser.html if usertype=='User', from navbar as this feature is not given to the user
-    let UserType = localStorage.getItem('UserType') ? localStorage.getItem('UserType') : ''
-    if (UserType == "User") {
-      document.getElementById("searchUsers").style.display = "none";
-    }
-  </script>
-
-  <!--Profile form-->
-  <div class="form__center">
-    <form onsubmit="return false" style="width: auto;  margin-left : 30vw;  margin-right : 30vw;margin-top: 10vw"
+  <!--profile Card-->
+  <div class="profileCard__center">
+    <div class="profileCard"
       id="home">
       <h3>Profile</h3><br>
       <output>Name : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output>
@@ -76,7 +64,7 @@ form{
       <output>Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</output><output>
         <script>document.write(localStorage.getItem('email'));</script>
       </output><br>
-    </form>
+    </div>
   </div>
 
 

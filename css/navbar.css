@@ -1,10 +1,7 @@
 /*Navigation bar css */
 * {box-sizing: border-box;}
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+
 
 .topnav {
   overflow: hidden;
@@ -53,24 +50,11 @@ body {
   font-size: 17px;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
 
 }
 
-/* .topnav .search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-} */
-
-/* .topnav .search-container button:hover {
-  background: #ccc;
-} */
-
+/* Responsive feature*/
 @media screen and (max-width: 600px) {
   .topnav .search-container {
     float: none;

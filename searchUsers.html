@@ -18,7 +18,7 @@
   <!--External CSS-->
   <link rel="stylesheet" href="css\style.css">
   <link rel="stylesheet" href="css\navbar.css">
-  <link rel="stylesheet" href="css/searchUserPage_styling.css">
+  <link rel="stylesheet" href="css\searchUserPage_styling.css">
 </head> 
 
 <body >
@@ -32,7 +32,7 @@
     <input type="email" id="email" name="email" placeholder="Email Address" >
     <input type="tel" id="number" name="number" placeholder="Phone Number" >
     <input type="text" id="username" name="username" placeholder="Username" >
-    <button type="submit" id="editDetails" class="btn" onclick="updateUser();">Update User</button> <!-- updateUser() called from updateUserByAdmin.js file -->
+    <button type="submit" id="editDetails" class="btn" onclick="updateUser();">Update User</button> <!-- updateUser() called  -->
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button><!--Close pop up form-->
   </form>
   <!--Update user by admin functionality Ends-->
@@ -45,7 +45,7 @@
     <a href="commonProfile.html">Home</a>
     <a href="editProfile.html">Update Profile</a>
     <a id="searchUsers" class="active" href="searchUsers.html">Search Users</a>
-    <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button><!--Logout button calls the function in profile.js-->
+    <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button>
   </div>
   <!--Navbar ends here-->
   
@@ -100,11 +100,7 @@
     }
 
 
-    //Show data in the table
-    let UserType=localStorage.getItem('UserType') ? localStorage.getItem('UserType') : '';
-    if(UserType == "User"){
-      document.getElementById("searchUsers").style.display = "none";
-    }
+
 
     user_records=JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : [] //putting data from User array into user_records
     buildTable(user_records) 
@@ -121,7 +117,7 @@
           <td>${data[i].Gender}</td>
           <td>${data[i].PhoneNumber}</td>
           <td>${data[i].email}</td>
-          <td><button id="popup" onclick="openForm(${i})">Edit</button></td> 
+          <td><button id="popup" onclick="openFormOperations(${i})">Edit</button></td> 
           <td><button type="submit" value="Delete" onclick="removeItemOnce(${i})">Delete</button></td> 
         </tr>`;
 

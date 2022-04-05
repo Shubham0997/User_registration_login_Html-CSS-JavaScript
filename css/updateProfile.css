@@ -1,0 +1,33 @@
+/* This css file contaion css properties for edit profile page to make it responsive, other properties adapted from style.css*/
+
+
+
+
+/* 
+* =================
+* == Update form ==
+* =================
+*/
+
+
+/* Responsive feature*/
+@media (max-width: 768px) {
+  .update_form__center {
+    padding-inline: 0.7em;
+  }
+}
+
+@media (max-width: 768px) {
+  .form__center {
+    display: grid;
+    min-height: 50vh;
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+  form {
+    margin: 0 !important;
+    margin-top: 20vw !important;
+  }
+}
+
+/* Forms CSS Ends*/

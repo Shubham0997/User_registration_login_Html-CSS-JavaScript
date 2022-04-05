@@ -21,8 +21,10 @@
     <!--
         css declarations
     -->
-       <!--External CSS-->
+
+    <!--Common css properties file-->
     <link rel="stylesheet" href="css\style.css">
+    
     <!-- Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -33,7 +35,7 @@
     <!-- User sign up form-->
     <div class="signup__center">
         <form name="signup" onsubmit="return false" class="signup__form">
-            <!-- fucntion validateSignupForm() will validate inputs and further input the data into JSON array. function in js\storeRegistrationData.js file -->
+          
 
             <h3>Sign up here</h3>
             <input type="text" id="full_name" name="full_name" placeholder="Full Name" required>
@@ -49,7 +51,7 @@
 
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
-            <button type="submit" value="submit" onclick="validateSignupForm();">Sign Up</button>
+            <button type="submit" value="submit" onclick="validateSignupForm();">Sign Up</button>  
             <br>
             <br>
             <br>

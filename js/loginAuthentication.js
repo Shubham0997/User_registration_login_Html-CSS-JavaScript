@@ -5,36 +5,36 @@ let FullName=localStorage.getItem('FullName')?localStorage.getItem('FullName'):'
 
 
 if(FullName!='')
-{ 
+{ //if someone is logged in, redirect to profile
     window.location.href="commonProfile.html";
   
 }
 
 //verifying user credentials 
-function loginAuthentication(){
- 
+function loginAuthentication() {
+
     //getting values from sign in form
     let username = document.forms["signin"]["username"].value;
     let password = document.forms["signin"]["password"].value;
 
     let user_records = new Array();
-    user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[] // getting Users array to check for user credentials
+    user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : [] // getting Users array to check for user credentials
 
-    if(user_records.some((v)=>{return v.Username==username && v.Password==password})){ //if credentials matches a user
-  
-        let current_user= user_records.filter((v)=>{return v.Username==username && v.Password==password})[0] //getting the user's data
+    if (user_records.some((v) => { return v.Username == username && v.Password == password })) { //if credentials matches a user
+
+        let current_user = user_records.filter((v) => { return v.Username == username && v.Password == password })[0] //getting the user's data
 
         //setting the user information temporarily in the local storage as seperate variables
-        localStorage.setItem('FullName',current_user.FullName);
-        localStorage.setItem('email',current_user.email);
-        localStorage.setItem('PhoneNumber',current_user.PhoneNumber);
-        localStorage.setItem('Gender',current_user.Gender);
-        localStorage.setItem('Username',current_user.Username);
-        localStorage.setItem('UserType',current_user.UserType);
+        localStorage.setItem('FullName', current_user.FullName);
+        localStorage.setItem('email', current_user.email);
+        localStorage.setItem('PhoneNumber', current_user.PhoneNumber);
+        localStorage.setItem('Gender', current_user.Gender);
+        localStorage.setItem('Username', current_user.Username);
+        localStorage.setItem('UserType', current_user.UserType);
 
-        window.location.href="commonProfile.html";
+        window.location.href = "commonProfile.html"; 
 
-    }else{
+    } else {
         alert("Username or password incorrect!");
     }
 }

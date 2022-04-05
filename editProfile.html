@@ -25,18 +25,9 @@
 
     <!--External CSS-->
     <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css\updateProfile.css">
     <link rel="stylesheet" href="css\navbar.css">
 
-<style>
-form{ 
-      position:relative;
-  margin-top: 30%;
-  overflow-x:auto;
-  overflow-y: auto;
-    }
-
-    </style>
-   
 
 </head>
 <body>
@@ -47,22 +38,14 @@ form{
         <a  href="commonProfile.html">Home</a>
         <a class="active" href="editProfile.html">Update Profile</a>
         <a id="searchUsers" href="searchUsers.html">Search Users</a>
-        <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button><!--Logout button calls the function in profile.js-->
+        <button class="logoutButton" type="submit" value="submit" onclick="Logout();" >Log Out</button>
       </div>
       <!--Navbar Ends-->
 
-      <script>//following script removes searchUser.html if usertype=='User', from navbar as this feature is not given to the user
-          let UserType=localStorage.getItem('UserType')?localStorage.getItem('UserType'):''
-            if(UserType=="User"){
-                document.getElementById("searchUsers").style.display = "none";
-            }
-      </script>
-
-
     <!--Update/edit profile form-->
-    <div class="form__center">
-    <form name="update" style="width: auto; margin-left : 30vw;  margin-right : 30vw; margin-top: 10vw; " onsubmit="return false" id="updateProfile">
-        <h3>Edit Profile</h3>
+    <div class="update_form__center">
+    <form name="update" style="width: 400px; " onsubmit="return false" id="updateProfile">
+        <h3> Edit Profile </h3>
             
                     <input type="text" id="full_name" name="full_name" placeholder="Full Name" >
                     <input type="email" id="email" name="email" placeholder="Email Address" >
