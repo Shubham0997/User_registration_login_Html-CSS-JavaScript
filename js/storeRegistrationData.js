@@ -3,58 +3,116 @@
 let userType="";// user type , either admin or user
 function setUserType(){  //will be executed only by adminRegistration
     userType="Admin";
-    validateSignupForm();
+    validate();
 }
 
-//validated phone number and password
-function validateSignupForm() {
-
-    //getting values from the signup form
-    let fullName= document.forms["signup"]["full_name"].value;
-    let email = document.forms["signup"]["email"].value;
-    let phoneNumber= document.forms["signup"]["number"].value;
-    let gender= document.forms["signup"]["Gender"].value;
-    let username= document.forms["signup"]["username"].value;
-    let password=document.forms["signup"]["password"].value;
+//validated the inputs
+function validate(){
   
-    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/; //password regex
+  //getting inputs from the form
+  const fullName = document.getElementById('full_name');
+  const email = document.getElementById('email');
+  const phoneNumber = document.getElementById('number');
+  const gender = document.getElementById('Gender');
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
+  
+  //setting error border by adding error class accordingly
+  const setError = (element, message) => {
+      const inputControl = element.parentElement;
+      const errorDisplay = inputControl.querySelector('.error');
+  
+      errorDisplay.innerText = message;
+      inputControl.classList.add('error');
+      inputControl.classList.remove('success')
+  }
  
-    //section below checks for validation of each field
+  //setting success border by adding success class accordingly
+  const setSuccess = element => {
+      const inputControl = element.parentElement;
+      const errorDisplay = inputControl.querySelector('.error');
+  
+      errorDisplay.innerText = '';
+      inputControl.classList.add('success');
+      inputControl.classList.remove('error');
+  };
+ 
+  //validate inputs from the form
+  const validateInputs = () => {
+  
+    //trimming each input if blank spaces are found
+      const fullnameValue = fullName.value.trim();
+      const emailValue = email.value.trim();
+      const phoneNumberValue = phoneNumber.value.trim();
+      const genderValue = gender.value.trim();
+      const usernameValue = username.value.trim();
+      const passwordValue = password.value.trim();
 
-    if(fullName==''){ //checking for the Name of the user
-      window.alert("Enter your name");
+      let wrongInput=0; //variable to check the number of wrong inputs
+    
+    //checking full name for validation
+    if (fullnameValue === '') { 
+      setError(fullName, 'Name is required.');
+      wrongInput++
+    } else {
+      setSuccess(fullName);
+    }
+
+    //checking email for validation
+    if (emailValue === '') {
+      setError(email, 'Email is required.');
+    } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailValue))) {
+      setError(email, 'Provide a valid email address.');
+      wrongInput++
+    } else {
+      setSuccess(email);
+    }
+
+    //checking phone number for validation
+    if(phoneNumberValue.length != 10){
+      setError(phoneNumber, 'Enter a valid phone number.');
+      wrongInput++
+    }else{
+      setSuccess(phoneNumber);
+    }
+
+    //checking gender value for validation
+    if (genderValue === '') {
+      setError(gender, 'Gender is required.');
+      wrongInput++
+    } else {
+      setSuccess(gender);
+    }
+
+    //checking username for validation
+    if (usernameValue === '') {
+      setError(username, 'Username is required.');
+      wrongInput++
+    } else {
+      setSuccess(username);
+    }
+
+    //checking password for validation
+    if (passwordValue === '') {
+      setError(password, 'Password is required.');
+      wrongInput++
+    } else if (!(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(passwordValue))) {
+      setError(password, 'Enter a valid password.');
+      wrongInput++
+    } else {
+      setSuccess(password);
+    }
+
+    //if even a single input is wrong, data won't be added to the database
+    if (wrongInput > 0) {
       return false;
+    } else {
+      //if every input is correct, adding the data
+      updateDatabase(fullnameValue, emailValue, phoneNumberValue, genderValue, usernameValue, passwordValue);
     }
 
-    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) //check for email validation
-    {
-      window.alert("Enter a valid Email address");
-      return false;
-    }
-
-    if (phoneNumber.length != 10) { // check for password length
-      window.alert("Enter a valid phone number");
-      return false;
-    }
-
-    if(gender==''){ //checking for gender entry
-      window.alert("Select your gender");
-      return false;
-    }
-
-    if(username==''){ //checking for the username entry
-      window.alert("Enter a Username");
-      return false;
-    }
-
-    if(!regularExpression.test(password)) { //check for password using regex
-        alert("Password should contain atleast one number, one special character and must have 8-16 characters.");
-        return false;
-    }
-
-    //if the data is valid, the input will be updated into the database/JSON Array
-    updateDatabase(fullName,email,phoneNumber,gender,username,password);
-
+  };
+  validateInputs()
   }
 
 //Enters the data into the JSON array
@@ -63,12 +121,13 @@ function updateDatabase (fullName,email,phoneNumber,gender,username,password) {
     if(userType==""){ //will execute if user type is empty
         userType="User"
     }
-  
+
     let user_records= new Array();  //creating user_records array to store the JSON object
     user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[] //putting data from User array into user_records
 
-    if(user_records.some((v)=>{return v.Username==username})){ //checking if username already exists
-        window.alert("User already exists.");
+    //checking if username already exists
+    if(user_records.some((v)=>{return v.Username==username})){ 
+      window.alert("User already exists.");
     }else{
         //if username doesn't exists, add record to 'user_records' Array
         user_records.push({

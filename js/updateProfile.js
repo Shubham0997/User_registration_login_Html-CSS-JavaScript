@@ -21,6 +21,7 @@ function updateProfile(){
     user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : []  //putting data from User array into user_records
     const index = user_records.findIndex(user_records => user_records.Username == localUsername);//getting index of the user using username
 
+    console.log(index)
 
     var counterForUpdatedValues = 0;//number of fields updated by the user 
 
