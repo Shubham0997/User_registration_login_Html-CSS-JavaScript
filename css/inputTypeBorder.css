@@ -24,8 +24,29 @@
     border-color: #ff3860;
 }
 
+.input-control select {
+    border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-size: 14px;
+	padding: 10px;
+	width: 100%;
+}
+
+.input-control select:focus {
+    outline: 0;
+}
+
+.input-control.success select {
+    border-color: #09c372;
+}
+
+.input-control.error select {
+    border-color: #ff3860;
+}
+
 .input-control .error {
     color: #ff3860;
-    font-size: 12px;
+    font-size: 14px;
     height: 1px;
 }

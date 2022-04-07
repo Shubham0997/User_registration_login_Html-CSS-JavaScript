@@ -1,4 +1,15 @@
-<!--This page contains sign up page for admin-->
+<!--
+    Create a simple "User" CRUD registration page with Search functionality.
+        a. Validations should be there.
+        b. Proper naming conventions should be followed.
+        c. Make it as good looking as you can.
+        d. OOPS mandatory and must be use wisely.
+
+    @auther : Shubham Sharma
+-->
+
+<!--This is the index file and hence will be loaded first-->
+<!--This page contains functionality for user to sign up-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +21,10 @@
     <!--
         css declarations
     -->
-       <!--External CSS-->
+
+    <!--Common css properties file-->
     <link rel="stylesheet" href="css\style.css">
     <link rel="stylesheet" href="css/inputTypeBorder.css">
-
 
     <!-- Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -22,48 +33,62 @@
 
 </head>
 <body>
-    <!-- Admin sign up form-->
+    <!-- User sign up form-->
     <div class="signup__center">
         <form name="signup" onsubmit="return false" class="signup__form" id="form">
-    
+          
+
             <h3>Sign up here (Admin)</h3>
-            <div class="input-control">
-                <input type="text" id="full_name" name="full_name" placeholder="Full Name">
-                <div class="error"></div>
+            <div id="nameDiv" class="input-control">
+            <input type="text" id="full_name" name="full_name" placeholder="Full Name" oninput="validateFullName()">
+            <div class="error" id="nameError"></div>
             </div>
-            <div class="input-control">
-                <input type="email" id="email" name="email" placeholder="Email Address">
-                <div class="error"></div>
+
+            <div id="emailDiv" class="input-control">
+            <input type="email" id="email" name="email" placeholder="Email Address" oninput="validateEmail()" >
+            <div class="error" id="emailError"></div>
             </div>
-            <div class="input-control">
-                <input type="tel" id="number" name="number" placeholder="Phone Number">
-                <div class="error"></div>
+
+            <div id="numberDiv" class="input-control">
+            <input type="tel" id="number" name="number" placeholder="Phone Number" oninput="validateNumber()" >
+            <div class="error" id="numberError"></div>
             </div>
-            <div class="input-control">
-                <select id="Gender" name="Gender">
-                    <option value="" disabled selected hidden>Choose Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Others">Others</option>
-                </select>
-                <div class="error"></div>
+
+
+            <div id="genderDiv" class="input-control">
+            <select id="Gender" name="Gender" oninput="validateGender()">
+                <option value="" disabled selected hidden>Choose Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+            </select>
+            <div id="genderError" class="error"></div>
             </div>
-            <div class="input-control">
-                <input type="text" id="username" name="username" placeholder="Username">
-                <div class="error"></div>
+
+            <div id="usernameDiv" class="input-control">
+            <input type="text" id="username" name="username" placeholder="Username" oninput="validateUsername()" >
+            <div id="usernameError" class="error"></div>
             </div>
-            <div class="input-control">
-                <input type="password" id="password" name="password" placeholder="Password">
-                <div class="error"></div>
+
+            <div id="passwordDiv" class="input-control">
+            <input type="password" id="password" name="password" placeholder="Password" oninput="validatePassword()">
+            <div id="passwordError" class="error"></div>
             </div>
-            <button type="submit" value="submit" onclick="setUserType();">Sign Up</button>
+
+            <div class="input-control">
+            <button type="submit" value="submit" onclick="setUserType();">Sign Up</button> 
+            <div id="submitError" class="error"></div> 
+            </div>
             <br>
             <br>
             <br>
-            <p>Already have an account?&nbsp&nbsp&nbsp<a href="login.html">Log in !</a></p>
+            <p>Already have an account? &nbsp&nbsp&nbsp <a href="login.html">Log in !</a></p>
         </form>
     </div>
+
+
     <!-- External JavaScript -->
-    <script src="js\storeRegistrationData.js"></script>
+    <script src="js/storeRegistrationData.js"></script>
+
 </body>
 </html>

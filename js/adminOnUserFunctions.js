@@ -1,6 +1,17 @@
 
 var updateID; //index of user to updated by the admin
 
+//variable declaration to store the values from database of indexed user 
+var fullNameDB;
+var emailAddressDB;
+var phoneNumberDB;
+var usernameDB;
+
+var user_records = new Array();//creating user_records array to store the JSON object
+user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : []  //putting data from User array into user_records
+
+
+//function to perform operations upon opening the popup form
 function openFormOperations(index) {
 
   this.updateID = index; //setting value of index to a global variable
@@ -9,9 +20,12 @@ function openFormOperations(index) {
   //blur the background
   var blur2 = document.getElementById('searchUser');
   blur2.classList.toggle('activeForm')
- 
-  let user_records = new Array(); //creating user_records array to store the JSON object
-  user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : [] //putting data from User array into user_records
+
+  //getting values from database
+  this.fullNameDB = user_records[updateID].FullName;
+  this.emailAddressDB = user_records[updateID].email;
+  this.phoneNumberDB = user_records[updateID].PhoneNumber;
+  this.usernameDB = user_records[updateID].Username;
 
   //setting default values in the form as the existing values
   document.getElementById("full_name").defaultValue = user_records[updateID].FullName;
@@ -22,14 +36,26 @@ function openFormOperations(index) {
   //by dafault disable the update button
   document.getElementById("editDetails").disabled = true;
 
-  $(document).ready(function () { //enable the update button upon input change in the form
-    $('.form-popup',).on('input change', function () {
+}
 
-      $('#editDetails').prop('disabled', false);
-    });
-  });
+//function to enable/disable the submit button accordingly
+function setEnable() {
+
+  //get the values from the database
+  let fullName = document.forms["updateUserByAdmin"]["full_name"].value;
+  let email = document.forms["updateUserByAdmin"]["email"].value;
+  let phoneNumber = document.forms["updateUserByAdmin"]["number"].value;
+  let username = document.forms["updateUserByAdmin"]["username"].value;
+
+  //enable the update button if even a single field is altered else disabled
+  if (fullNameDB != fullName || emailAddressDB != email || phoneNumberDB != phoneNumber || usernameDB != username) {
+    document.getElementById("editDetails").disabled = false;
+  } else {
+    document.getElementById("editDetails").disabled = true;
+  }
 
 }
+
 
 
 //below function updates the user values after proper validation
@@ -42,10 +68,6 @@ function updateUser() {
   let email = document.forms["updateUserByAdmin"]["email"].value;
   let phoneNumber = document.forms["updateUserByAdmin"]["number"].value;
   let username = document.forms["updateUserByAdmin"]["username"].value;
-
-
-  let user_records = new Array();//creating user_records array to store the JSON object
-  user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : []  //putting data from User array into user_records
 
   var counterForUpdatedValues = 0;//number of fields updated by the admin
 
@@ -66,7 +88,7 @@ function updateUser() {
       } else {
         window.alert("Enter a valid Email address");
         return false;
-        
+
       }
     }
   }
@@ -104,23 +126,25 @@ function updateUser() {
 }
 
 
-    //remove user , triggered by Delete User button, using index
-    function removeItem(index) {
-      if (index > -1) {
-        user_records.splice(index, 1);
-        localStorage.setItem("Users",JSON.stringify(user_records));
-        document.location.reload(true)
-      }
+//remove user , triggered by Delete User button, using index
+function removeItem(index) {
+  if (index > -1) {
+    user_records.splice(index, 1);
+    localStorage.setItem("Users", JSON.stringify(user_records));
+    document.location.reload(true)
+  }
 
-      return user_records;
-    }
+  return user_records;
+}
 
 //close popup form up click
 function closeForm() { //function to close the popup form to update user values
   document.getElementById("myForm").style.display = "none";
 
-  var blur2 =document.getElementById('searchUser');//unblur the background
+  var blur2 = document.getElementById('searchUser');//unblur the background
   blur2.classList.toggle('activeForm')
+
+  document.location.reload(true)
 }
 
 //search functionality over users table

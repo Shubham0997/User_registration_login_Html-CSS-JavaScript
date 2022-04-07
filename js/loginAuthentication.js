@@ -16,6 +16,7 @@ function loginAuthentication() {
     //getting values from sign in form
     let username = document.forms["signin"]["username"].value;
     let password = document.forms["signin"]["password"].value;
+    let elementError = document.getElementById('submitError');
 
     let user_records = new Array();
     user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : [] // getting Users array to check for user credentials
@@ -35,6 +36,6 @@ function loginAuthentication() {
         window.location.href = "commonProfile.html"; 
 
     } else {
-        alert("Username or password incorrect!");
+        elementError.innerHTML = 'Username and/or password incorrect!';
     }
 }

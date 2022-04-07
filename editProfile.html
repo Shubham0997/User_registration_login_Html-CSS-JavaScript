@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="css\style.css">
     <link rel="stylesheet" href="css\updateProfile.css">
     <link rel="stylesheet" href="css\navbar.css">
+    <link rel="stylesheet" href="css/inputTypeBorder.css">
 
 
 </head>
@@ -46,18 +47,41 @@
     <div class="update_form__center">
     <form name="update" style="width: 400px; " onsubmit="return false" id="updateProfile">
         <h3> Edit Profile </h3>
-            
+                    <div id="nameDiv" class="input-control">
                     <input type="text" id="full_name" name="full_name" placeholder="Full Name" >
-                    <input type="email" id="email" name="email" placeholder="Email Address" >
-                    <input type="tel" id="number" name="number" placeholder="Phone Number" >
-                    <select id="Gender" name="Gender" >
+                    <div class="error" id="nameError"></div>
+                    </div>
+
+                    <div id="emailDiv" class="input-control">
+                    <input type="email" id="email" name="email" placeholder="Email Address" oninput="validateEmail()">
+                    <div class="error" id="emailError"></div>
+                    </div>
+
+                    <div id="numberDiv" class="input-control">
+                    <input type="tel" id="number" name="number" placeholder="Phone Number" oninput="validateNumber()">
+                    <div class="error" id="numberError"></div>
+                    </div>  
+
+                    <div id="genderDiv" class="input-control">
+                    <select id="Gender" name="Gender" oninput="validateGender()">
                         <option value="" disabled selected hidden>Choose Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                       </select>
-                    <input type="text" id="username" name="username" placeholder="Username" >
-                    <input type="password" id="password" name="password" placeholder="Password" >
+                      <div id="genderError" class="error"></div>
+                      </div>
+
+                      <div id="usernameDiv" class="input-control">
+                    <input type="text" id="username" name="username" placeholder="Username" oninput="validateUsername()">
+                    <div id="usernameError" class="error"></div>
+                     </div>
+
+                    <div id="passwordDiv" class="input-control">
+                    <input type="password" id="password" name="password" placeholder="Password" oninput="validatePassword()">
+                    <div id="passwordError" class="error"></div>
+                    </div>
+
                     <button type="submit" value="submit" onclick="updateProfile();">Update</button> <!--update profile function-->
     </form>
   </div>

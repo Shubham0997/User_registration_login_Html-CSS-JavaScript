@@ -2,6 +2,82 @@
 
 // this javascript page contains  edit/update profile functionality for both user and admin
 
+
+// function to validate email address if an email address is to be updated
+function validateEmail() {
+    var email = document.getElementById('email').value; //
+    var elementBorder = document.getElementById("emailDiv");
+    let elementError = document.getElementById('emailError');
+
+    //checking email for validation
+
+    if (email != '') { //if an email is enetered in text box
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+            elementBorder.classList.remove("success");
+            elementBorder.classList.add("error");
+            elementError.innerHTML = 'Please enter your email.';
+        } else {
+            elementError.innerHTML = '';
+            elementBorder.classList.remove("error");
+            elementBorder.classList.add("success");
+        }
+    } else {
+        elementError.innerHTML = '';
+        elementBorder.classList.remove("error");
+        elementBorder.classList.remove("success");
+    }
+}
+
+// function to validate phone number if an phone number is to be updated
+function validateNumber(){
+    var number = document.getElementById('number').value;
+    var elementBorder = document.getElementById("numberDiv");
+    let elementError = document.getElementById('numberError');
+  
+    //checking phone number for validation
+    if(number !=''){ //if phone number is to be edited
+    if (!(number.match(/^\d{10}$/))) {
+        elementBorder.classList.remove("success");
+        elementBorder.classList.add("error");
+        elementError.innerHTML = 'Please enter your Phone number.';
+    } else {
+        elementError.innerHTML = '';
+      elementBorder.classList.remove("error");
+      elementBorder.classList.add("success");
+    }
+    }else{
+        elementError.innerHTML = '';
+        elementBorder.classList.remove("error");
+        elementBorder.classList.remove("success");
+    }
+  
+}
+
+
+function validatePassword(){
+    var password = document.getElementById('password').value;
+    var elementBorder = document.getElementById("passwordDiv");
+    let elementError = document.getElementById('passwordError');
+  
+    //checking password for validation
+   if(password!=''){
+   if (!(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password))) {
+    elementBorder.classList.remove("success");
+    elementBorder.classList.add("error");
+    elementError.innerHTML = 'Please enter a valid password.';
+    } else {
+        elementError.innerHTML = '';
+      elementBorder.classList.remove("error");
+      elementBorder.classList.add("success");
+    }
+  }else{
+    elementError.innerHTML = '';
+    elementBorder.classList.remove("error");
+    elementBorder.classList.remove("success");
+  }
+}
+
+
 //update the profile
 function updateProfile(){
     //getting values from the form
@@ -20,8 +96,7 @@ function updateProfile(){
     let user_records = new Array(); //creating user_records array to store the JSON object
     user_records = JSON.parse(localStorage.getItem("Users")) ? JSON.parse(localStorage.getItem("Users")) : []  //putting data from User array into user_records
     const index = user_records.findIndex(user_records => user_records.Username == localUsername);//getting index of the user using username
-
-    console.log(index)
+    
 
     var counterForUpdatedValues = 0;//number of fields updated by the user 
 
@@ -41,14 +116,14 @@ function updateProfile(){
             localStorage.setItem('email', email);
             counterForUpdatedValues++;
         } else {
-            window.alert("Enter a valid Email address");
+           validateEmail()
           
         }
     }
 
     if (phoneNumber != '') { //if phone number is being updated
         if (phoneNumber.length != 10) {//check for number validation
-            window.alert("Enter a valid phone number");
+            validateNumber()
            
         } else {
             user_records[index].PhoneNumber = phoneNumber;
@@ -80,7 +155,7 @@ function updateProfile(){
     if (password != '') { //if password is being updated
 
         if (!regularExpression.test(password)) { //cheking for password validation
-            alert("Password should contain atleast one number, one special character and must have 8-16 characters.");
+            validatePassword()
      
         } else {
             user_records[index].Password = password;

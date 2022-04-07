@@ -1,148 +1,168 @@
-// this javascript page handles user,admin registration functionality
 
 let userType="";// user type , either admin or user
 function setUserType(){  //will be executed only by adminRegistration
     userType="Admin";
-    validate();
+    updateDatabase();
 }
 
-//validated the inputs
-function validate(){
+
+
+function validateFullName() {
+  var fullName = document.getElementById('full_name').value;
+  var elementBorder = document.getElementById("nameDiv");
+  let elementError = document.getElementById('nameError');
   
-  //getting inputs from the form
-  const fullName = document.getElementById('full_name');
-  const email = document.getElementById('email');
-  const phoneNumber = document.getElementById('number');
-  const gender = document.getElementById('Gender');
-  const username = document.getElementById('username');
-  const password = document.getElementById('password');
-  
-  //setting error border by adding error class accordingly
-  const setError = (element, message) => {
-      const inputControl = element.parentElement;
-      const errorDisplay = inputControl.querySelector('.error');
-  
-      errorDisplay.innerText = message;
-      inputControl.classList.add('error');
-      inputControl.classList.remove('success')
+  if (fullName === '') { 
+    elementBorder.classList.remove("success");
+    elementBorder.classList.add("error");
+    elementError.innerHTML = 'Please enter your name.';
+    } else {
+      elementError.innerHTML = '';
+      elementBorder.classList.remove("error");
+      elementBorder.classList.add("success");
+    }
+}
+
+function validateEmail() {
+  var email = document.getElementById('email').value;
+  var elementBorder = document.getElementById("emailDiv");
+  let elementError = document.getElementById('emailError');
+
+  //checking email for validation
+  if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+    elementBorder.classList.remove("success");
+    elementBorder.classList.add("error");
+    elementError.innerHTML = 'Please enter your email.';
+  }else{
+    elementError.innerHTML = '';
+    elementBorder.classList.remove("error");
+    elementBorder.classList.add("success");
+  } 
+
+}
+
+function validateNumber(){
+  var number = document.getElementById('number').value;
+  var elementBorder = document.getElementById("numberDiv");
+  let elementError = document.getElementById('numberError');
+
+  //checking phone number for validation
+  if (!(number.match(/^\d{10}$/))) {
+    elementBorder.classList.remove("success");
+    elementBorder.classList.add("error");
+    elementError.innerHTML = 'Please enter your Phone number.';
+  } else {
+    elementError.innerHTML = '';
+    elementBorder.classList.remove("error");
+    elementBorder.classList.add("success");
   }
- 
-  //setting success border by adding success class accordingly
-  const setSuccess = element => {
-      const inputControl = element.parentElement;
-      const errorDisplay = inputControl.querySelector('.error');
-  
-      errorDisplay.innerText = '';
-      inputControl.classList.add('success');
-      inputControl.classList.remove('error');
-  };
- 
-  //validate inputs from the form
-  const validateInputs = () => {
-  
-    //trimming each input if blank spaces are found
-      const fullnameValue = fullName.value.trim();
-      const emailValue = email.value.trim();
-      const phoneNumberValue = phoneNumber.value.trim();
-      const genderValue = gender.value.trim();
-      const usernameValue = username.value.trim();
-      const passwordValue = password.value.trim();
 
-      let wrongInput=0; //variable to check the number of wrong inputs
-    
-    //checking full name for validation
-    if (fullnameValue === '') { 
-      setError(fullName, 'Name is required.');
-      wrongInput++
-    } else {
-      setSuccess(fullName);
-    }
+}
 
-    //checking email for validation
-    if (emailValue === '') {
-      setError(email, 'Email is required.');
-    } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailValue))) {
-      setError(email, 'Provide a valid email address.');
-      wrongInput++
-    } else {
-      setSuccess(email);
-    }
+function validateGender(){
+  var gender = document.getElementById('Gender').value;
+  var elementBorder = document.getElementById("genderDiv");
+  let elementError = document.getElementById('genderError');
 
-    //checking phone number for validation
-    if(phoneNumberValue.length != 10){
-      setError(phoneNumber, 'Enter a valid phone number.');
-      wrongInput++
-    }else{
-      setSuccess(phoneNumber);
-    }
-
-    //checking gender value for validation
-    if (genderValue === '') {
-      setError(gender, 'Gender is required.');
-      wrongInput++
-    } else {
-      setSuccess(gender);
-    }
-
-    //checking username for validation
-    if (usernameValue === '') {
-      setError(username, 'Username is required.');
-      wrongInput++
-    } else {
-      setSuccess(username);
-    }
-
-    //checking password for validation
-    if (passwordValue === '') {
-      setError(password, 'Password is required.');
-      wrongInput++
-    } else if (!(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(passwordValue))) {
-      setError(password, 'Enter a valid password.');
-      wrongInput++
-    } else {
-      setSuccess(password);
-    }
-
-    //if even a single input is wrong, data won't be added to the database
-    if (wrongInput > 0) {
-      return false;
-    } else {
-      //if every input is correct, adding the data
-      updateDatabase(fullnameValue, emailValue, phoneNumberValue, genderValue, usernameValue, passwordValue);
-    }
-
-  };
-  validateInputs()
+  //checking gender value for validation
+  if (gender === '') {
+    elementBorder.classList.remove("success");
+    elementBorder.classList.add("error");
+    elementError.innerHTML = 'Please select gender.';
+  } else {
+    elementError.innerHTML = '';
+    elementBorder.classList.remove("error");
+    elementBorder.classList.add("success");
   }
+
+}
+
+function validateUsername(){
+  var username = document.getElementById('username').value;
+  var elementBorder = document.getElementById("usernameDiv");
+  let elementError = document.getElementById('usernameError');
+
+  if (username === '') { 
+    elementBorder.classList.remove("success");
+    elementBorder.classList.add("error");
+    elementError.innerHTML = 'Please enter your Username.';
+  } else {
+    elementError.innerHTML = '';
+    elementBorder.classList.remove("error");
+    elementBorder.classList.add("success");
+  }
+}
+
+function validatePassword(){
+  var password = document.getElementById('password').value;
+  var elementBorder = document.getElementById("passwordDiv");
+  let elementError = document.getElementById('passwordError');
+
+  //checking password for validation
+ if (!(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password))) {
+  elementBorder.classList.remove("success");
+  elementBorder.classList.add("error");
+  elementError.innerHTML = 'Please enter a valid password.';
+  } else {
+    elementError.innerHTML = '';
+    elementBorder.classList.remove("error");
+    elementBorder.classList.add("success");
+  }
+}
+
+
 
 //Enters the data into the JSON array
-function updateDatabase (fullName,email,phoneNumber,gender,username,password) {
+function updateDatabase () {
 
-    if(userType==""){ //will execute if user type is empty
-        userType="User"
-    }
+  //getting inputs from the form
+  const fullName = document.getElementById('full_name').value;
+  const email = document.getElementById('email').value;
+  const phoneNumber = document.getElementById('number').value;
+  const gender = document.getElementById('Gender').value;
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  let elementError = document.getElementById('submitError');
 
-    let user_records= new Array();  //creating user_records array to store the JSON object
-    user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[] //putting data from User array into user_records
+  if(fullName !='' && email!='' && phoneNumber!='' && gender!='' && username!=''&& password!=''){
+    elementError.innerHTML = '';
 
-    //checking if username already exists
-    if(user_records.some((v)=>{return v.Username==username})){ 
-      window.alert("User already exists.");
-    }else{
-        //if username doesn't exists, add record to 'user_records' Array
-        user_records.push({
-            "FullName":fullName,
-            "email":email,
-            "PhoneNumber":phoneNumber,
-            "UserType": userType,
-            "Gender":gender,
-            "Username":username,
-            "Password":password
-        })
-        localStorage.setItem("Users",JSON.stringify(user_records)); //upload data into Users JSON Array
 
-        window.alert("User account created successfully. Please log in!")
-        window.location.href="login.html"; //redirect to login.html after a successful sign up
-    }
+  if(userType==""){ //will execute if user type is empty
+      userType="User"
+  }
+
+  let user_records= new Array();  //creating user_records array to store the JSON object
+  user_records=JSON.parse(localStorage.getItem("Users"))?JSON.parse(localStorage.getItem("Users")):[] //putting data from User array into user_records
+
+  //checking if username already exists
+  if(user_records.some((v)=>{return v.Username==username})){ 
+    window.alert("User already exists.");
+  }else{
+      //if username doesn't exists, add record to 'user_records' Array
+      user_records.push({
+          "FullName":fullName,
+          "email":email,
+          "PhoneNumber":phoneNumber,
+          "UserType": userType,
+          "Gender":gender,
+          "Username":username,
+          "Password":password
+      })
+      localStorage.setItem("Users",JSON.stringify(user_records)); //upload data into Users JSON Array
+
+      window.alert("User account created successfully. Please log in!")
+      window.location.href="login.html"; //redirect to login.html after a successful sign up
+  }
+  }else{
+    validateFullName()
+    validateEmail()
+    validateNumber()
+    validateGender()
+    validateUsername()
+    validatePassword()
+    elementError.innerHTML = 'Please Enter the details';
+
+  }
 
 }

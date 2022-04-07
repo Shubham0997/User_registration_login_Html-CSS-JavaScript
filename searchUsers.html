@@ -28,10 +28,10 @@
   
   <form name="updateUserByAdmin" class="form-popup" id="myForm" onsubmit="return false" class="form-container">
     <h1>Edit Details</h1>
-    <input type="text" id="full_name" name="full_name" placeholder="Full Name" >
-    <input type="email" id="email" name="email" placeholder="Email Address" >
-    <input type="tel" id="number" name="number" placeholder="Phone Number" >
-    <input type="text" id="username" name="username" placeholder="Username" >
+    <input type="text" id="full_name" name="full_name" placeholder="Full Name" onkeyup="setEnable()">
+    <input type="email" id="email" name="email" placeholder="Email Address" onkeyup="setEnable()">
+    <input type="tel" id="number" name="number" placeholder="Phone Number" onkeyup="setEnable()">
+    <input type="text" id="username" name="username" placeholder="Username" onkeyup="setEnable()">
     <button type="submit" id="editDetails" class="btn" onclick="updateUser();">Update User</button> <!-- updateUser() called  -->
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button><!--Close pop up form-->
   </form>
